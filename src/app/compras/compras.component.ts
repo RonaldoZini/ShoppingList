@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CompraService } from '../compra.service';
 import { Compra } from '../compra';
 import { CompraItens } from '../compra-itens';
+import { MatDatepickerInputEvent } from '@angular/material';
 
 @Component({
   selector: 'app-compras',
@@ -15,6 +16,7 @@ export class ComprasComponent implements OnInit {
   produtos: Produto[];
   carrinho: Produto[];
   compra: Compra;
+  finalizado: boolean;
 
   constructor(
     private produtoService: ProdutoService,
@@ -22,6 +24,7 @@ export class ComprasComponent implements OnInit {
     private router: Router
   ) {
     this.compra = new Compra;
+    this.finalizado = false;
   }
 
   ngOnInit() {
@@ -36,10 +39,11 @@ export class ComprasComponent implements OnInit {
     this.carrinho = list.selectedOptions.selected.map(item => item.value);
   }
 
+  datePicker_onChange(event: MatDatepickerInputEvent<Date>) {
+    this.compra.dataHora = event.value.toISOString();
+  }
+
   comprar() {
-    this.compra.atendente = 'Ronaldo';
-    this.compra.dataHora = '2019-05-06T19:37:00';
-    
     this.carrinho.forEach(produto => {
       let compraitem: CompraItens = new CompraItens;
 
@@ -48,7 +52,8 @@ export class ComprasComponent implements OnInit {
 
       this.compra.compraItens.push(compraitem);
     });
-    this.compraService.post(this.compra).subscribe(e => console.log(e));
-  }
 
+    this.compraService.post(this.compra).subscribe(e => console.log(e));
+    this.finalizado = true;
+  }
 }
