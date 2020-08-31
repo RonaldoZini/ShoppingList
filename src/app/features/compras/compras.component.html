@@ -1,0 +1,78 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step>
+    <ng-template matStepLabel>Selecione os produtos.</ng-template>
+    <mat-card class="lista">
+      <mat-selection-list #listaProdutos>
+        <mat-grid-list cols="1" rowHeight="50px">
+          <mat-grid-tile *ngFor="let produto of produtos">
+            <img class="imagem" [src]="produto.imagem"/>  
+            <mat-list-option [value]="produto">
+              {{produto.descricao}}
+              <span class="preco">{{produto.preco | currency : 'R$ '}}</span>
+              <mat-divider></mat-divider>
+            </mat-list-option>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-selection-list>
+    </mat-card>
+    <div class="navegacao">
+      <button mat-flat-button color="primary" matStepperNext (click)="adicionarProdutos(listaProdutos)">Continuar<i
+          class="material-icons">chevron_right</i> </button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Informe os dados.</ng-template>
+    <mat-card class="dados">
+      <mat-grid-list cols="12" rowHeight="70px">
+        <mat-grid-tile colspan="6">
+          <mat-form-field class="form-field">
+            <input class="atendente" matInput placeholder="Atendente" [(ngModel)]="compra.atendente">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <mat-form-field class="form-field">
+            <mat-select placeholder="Forma de Pagamento">
+              <mat-option value="dinheiro">Dinheiro</mat-option>
+              <mat-option value="credito">Cartão de Crédito</mat-option>
+              <mat-option value="debito">Cartão de Débito</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+          <mat-form-field class="form-field">
+            <input matInput [matDatepicker]="picker" placeholder="Selecione a data" (dateChange)="datePicker_onChange($event)" autocomplete="off">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+    <mat-card class="carrinho">
+      <mat-list *ngFor="let produto of carrinho">
+        <mat-grid-list cols="1" rowHeight="50px">
+          <mat-grid-tile>
+            <img class="imagem" [src]="produto.imagem"/>  
+            <mat-list-item> 
+              {{produto.descricao}}
+              <span class="preco">{{produto.preco | currency : 'R$ '}}</span>
+            </mat-list-item>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-list>
+    </mat-card>
+    <div class="navegacao">
+      <button mat-flat-button color="primary" matStepperNext>Continuar&nbsp;<i class="material-icons">chevron_right</i>
+      </button>
+      <button mat-flat-button color="primary" matStepperPrevious><i class="material-icons">chevron_left</i>&nbsp;Voltar
+      </button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Finalizar Compra</ng-template>
+    <p class="finalizado" [style.visibility]="this.finalizado ? 'visible' : 'hidden'">Compra efetuada com sucesso!</p>
+    <div class="navegacao">
+      <button mat-flat-button color="warn" (click)="comprar()">Finalizar Compra<i class="material-icons">done</i>
+      </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

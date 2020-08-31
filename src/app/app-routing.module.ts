@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ComprasComponent } from './compras/compras.component';
+import { ComprasComponent } from './features/compras/compras.component';
 
 const routes: Routes = [
   { path: 'compras',  component: ComprasComponent },

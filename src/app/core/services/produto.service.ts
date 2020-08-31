@@ -1,17 +1,19 @@
+import { Produto } from './../models/produto';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Produto } from './produto';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutoService {
   endpoint: string;
+  local: string;
 
   constructor(private http: HttpClient) {
-    this.endpoint = 'https://faculdade-api-compras.azurewebsites.net/api/produto';
+    this.local = 'assets/static/produtos.json'
+    this.endpoint = environment.production ? environment.url + 'compra' : this.local;
   }
 
   getProdutos(): Observable<Produto[]> {
@@ -19,7 +21,7 @@ export class ProdutoService {
   }
 
   getProduto(id: number): Observable<Produto> {
-    const url = '${this.endpoint}/${id}';
+    const url = `${this.endpoint}/${id}`;
     return this.http.get<Produto>(url).pipe();
   }
 }

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ComprasComponent } from './compras/compras.component';
+import { ComprasComponent } from './features/compras/compras.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http'; 
 import { FormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MAT_DATE_LOCALE  } from '@angular/material';
 
 // Animations
@@ -44,6 +45,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatGridListModule,
     BrowserAnimationsModule,
     FormsModule,
   ],

@@ -1,10 +1,10 @@
+import { ProdutoService } from './../../core/services/produto.service';
 import { Component, OnInit } from '@angular/core';
-import { Produto } from '../produto';
-import { ProdutoService } from '../produto.service';
+import { Produto } from '../../core/models/produto';
 import { Router } from '@angular/router';
-import { CompraService } from '../compra.service';
-import { Compra } from '../compra';
-import { CompraItens } from '../compra-itens';
+import { CompraService } from '../../core/services/compra.service';
+import { Compra } from '../../core/models/compra';
+import { CompraItens } from '../../core/models/compra-itens';
 import { MatDatepickerInputEvent } from '@angular/material';
 
 @Component({
@@ -20,8 +20,7 @@ export class ComprasComponent implements OnInit {
 
   constructor(
     private produtoService: ProdutoService,
-    private compraService: CompraService,
-    private router: Router
+    private compraService: CompraService
   ) {
     this.compra = new Compra;
     this.finalizado = false;

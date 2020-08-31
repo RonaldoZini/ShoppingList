@@ -1,4 +1,3 @@
-import { Compra } from "./compra";
 import { Produto } from "./produto";
 
 export class CompraItens {
