@@ -1,3 +1,8 @@
 # Lista De Compras
 
-Este projeto foi desenvolvido para enviar e receber requisições de uma API de lista de compras.
+Projeto desenvolvido para simular o consumo de API REST com HttpClient.
+
+- Angular v7
+- Angular Material v7
+
+![Alt text](src/assets/images/gitReady.PNG)
